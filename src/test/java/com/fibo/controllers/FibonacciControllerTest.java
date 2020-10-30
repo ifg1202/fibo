@@ -29,4 +29,15 @@ public class FibonacciControllerTest {
 		.andExpect(jsonPath("$.value", is(0)));
 	}
 	
+	@Test
+	void getSecondFibonacciElement() throws Exception {
+		// given
+		Integer element = 2;
+		// when
+		mockMvc.perform(get("/v1/fibonacci/" + element ))
+		// then
+		.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		.andExpect(jsonPath("$.value", is(1)));
+	}
+	
 }

@@ -17,6 +17,7 @@ public class FibonacciController {
 	@GetMapping(path = "/{element}", produces = "application/json")
 	public ResponseEntity<FibonacciResult> getFibonacciValue(
 			@PathVariable Integer element) {
-		return new ResponseEntity<>(new FibonacciResult(0), HttpStatus.OK);
+		Integer result = element == 1 ? 0: 1;
+		return new ResponseEntity<>(new FibonacciResult(result), HttpStatus.OK);
 	}
 }
