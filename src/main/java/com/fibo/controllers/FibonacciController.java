@@ -13,11 +13,12 @@ import com.fibo.model.FibonacciResult;
 @RequestMapping("/v1/fibonacci")
 public class FibonacciController {
 
-
 	@GetMapping(path = "/{element}", produces = "application/json")
 	public ResponseEntity<FibonacciResult> getFibonacciValue(
 			@PathVariable Integer element) {
-		Integer result = element == 1 ? 0: 1;
-		return new ResponseEntity<>(new FibonacciResult(result), HttpStatus.OK);
+		return element == 0 ? 
+				new ResponseEntity<>(new FibonacciResult(0), HttpStatus.OK) :
+				new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
+	
 }

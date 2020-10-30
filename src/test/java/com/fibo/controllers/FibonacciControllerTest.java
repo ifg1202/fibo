@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,28 +17,28 @@ import org.springframework.test.web.servlet.MockMvc;
 public class FibonacciControllerTest {
 
 	@Autowired
-    MockMvc mockMvc;
-	
+	MockMvc mockMvc;
+
 	@Test
 	void getFirstFibonacciElement() throws Exception {
 		// given
-		Integer element = 1;
+		Integer element = 0;
 		// when
-		mockMvc.perform(get("/v1/fibonacci/" + element ))
-		// then
-		.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		.andExpect(jsonPath("$.value", is(0)));
+		mockMvc.perform(get("/v1/fibonacci/" + element))
+				// then
+				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.value", is(0)));
 	}
-	
+
 	@Test
-	void getSecondFibonacciElement() throws Exception {
+	void tryToGetInvalidElement() throws Exception {
 		// given
-		Integer element = 2;
+		Integer element = -1;
 		// when
-		mockMvc.perform(get("/v1/fibonacci/" + element ))
+		mockMvc.perform(get("/v1/fibonacci/" + element))
 		// then
-		.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		.andExpect(jsonPath("$.value", is(1)));
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+			
 	}
-	
+
 }
