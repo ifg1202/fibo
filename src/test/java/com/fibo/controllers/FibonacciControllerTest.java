@@ -25,9 +25,9 @@ public class FibonacciControllerTest {
 		Integer element = 0;
 		// when
 		mockMvc.perform(get("/v1/fibonacci/" + element))
-				// then
-				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.value", is(0)));
+		// then
+		.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+		.andExpect(jsonPath("$.value", is(0)));
 	}
 
 	@Test
@@ -37,8 +37,7 @@ public class FibonacciControllerTest {
 		// when
 		mockMvc.perform(get("/v1/fibonacci/" + element))
 		// then
-		.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
-			
+		.andExpect(status().is(HttpStatus.NOT_FOUND.value()));	
 	}
 
 }
