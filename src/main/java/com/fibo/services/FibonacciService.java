@@ -3,6 +3,9 @@ package com.fibo.services;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class FibonacciService {
 
 	public Optional<BigDecimal> getValue(Integer element) {
