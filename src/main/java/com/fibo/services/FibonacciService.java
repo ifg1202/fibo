@@ -6,25 +6,31 @@ import java.util.Optional;
 public class FibonacciService {
 
 	public Optional<BigDecimal> getValue(Integer element) {
-		 
-		if (element > 1){
-			BigDecimal value = BigDecimal.ZERO;
-			BigDecimal first = BigDecimal.ZERO;
-			BigDecimal second = BigDecimal.ONE;
-			for(int index = 0; index < element - 1; index++) {
-				value =  second.add(first);
-				first = second;
-				second = value;
-			}
-			return Optional.of(value);
-	    }
-	    else if (element == 1) {
-	        return Optional.of(BigDecimal.ONE);
-	    }
-	    else if (element == 0){
-	        return Optional.of(BigDecimal.ZERO);
-	    }
-		return Optional.empty();
+		return isValidElement(element) ? getFibonacciValue(element) : Optional.empty();
+	}
+
+	private Optional<BigDecimal> getFibonacciValue(Integer element) {
+		return isFirstElement(element) ? Optional.of(BigDecimal.ZERO) : performFibonacci(element);
+	}
+
+	private Optional<BigDecimal> performFibonacci(Integer element) {
+		BigDecimal value = BigDecimal.ONE;
+		BigDecimal first = BigDecimal.ZERO;
+		BigDecimal second = BigDecimal.ONE;
+		for(int counter = 1; counter < element; counter++) {
+			value =  second.add(first);
+			first = second;
+			second = value;
+		}
+		return Optional.of(value);
+	}
+
+	private boolean isValidElement(Integer element) {
+		return element >= 0;
+	}
+	
+	private boolean isFirstElement(Integer element) {
+		return element == 0;
 	}
 
 }
