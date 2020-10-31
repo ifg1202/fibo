@@ -1,8 +1,14 @@
 package com.fibo.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class FibonacciServiceTest {
 
@@ -13,9 +19,9 @@ public class FibonacciServiceTest {
 		//given
 		Integer firtsElement = 0;
 		//when
-		Integer value = flightService.getValue(firtsElement);
+		Optional<BigDecimal> value = flightService.getValue(firtsElement);
 		//then
-		assertEquals(0, value);
+		assertEquals(BigDecimal.ZERO, value.get());
 	}
 	
 	@Test
@@ -23,10 +29,35 @@ public class FibonacciServiceTest {
 		//given
 		Integer secondElement = 1;
 		//when
-		Integer value = flightService.getValue(secondElement);
+		Optional<BigDecimal> value = flightService.getValue(secondElement);
 		//then
-		assertEquals(1, value);
+		assertEquals(BigDecimal.ONE, value.get());
 	}
 	
+	@ParameterizedTest
+	@CsvSource({
+	    "2, 1",
+	    "3, 2",
+	    "4, 3",
+	    "5, 5",
+	    "6, 8",
+	    "7, 13",
+	    "8, 21",
+	    "50, 12586269025"
+	})
+    void performFibonacciSecuence(Integer element, BigDecimal value) {
+		//then
+		assertEquals(value, flightService.getValue(element).get());
+    }
+	
+	@Test
+	void getInvalidElement() {
+		//given
+		Integer invalidElement = -1;
+		//when
+		Optional<BigDecimal> value = flightService.getValue(invalidElement);
+		//then
+		assertTrue(value.isEmpty());
+	}
 	
 }
