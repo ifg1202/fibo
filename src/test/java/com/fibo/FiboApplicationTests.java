@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
-import com.fibo.model.FibonacciResult;
+import com.fibo.model.Result;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FiboApplicationTests {
@@ -22,9 +24,12 @@ class FiboApplicationTests {
 		//given
 		Integer element = 100;
 		//when
-		FibonacciResult result = restTemplate.getForObject("/v1/fibonacci/" + element, FibonacciResult.class);
+		ResponseEntity<Result> result = restTemplate.exchange(
+                "/v1/fibonacci/{element}",
+                HttpMethod.GET,
+                null, Result.class, element);
 		//then
-		assertEquals(new BigDecimal("354224848179261915075"), result.getValue());
+		assertEquals(new BigDecimal("354224848179261915075"), result.getBody().getValue());
 	}
 
 }

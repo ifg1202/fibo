@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fibo.model.FibonacciResult;
+import com.fibo.model.Result;
 import com.fibo.services.FibonacciService;
 
 @RestController
@@ -25,11 +25,11 @@ public class FibonacciController {
 	}
 
 	@GetMapping(path = "/{element}", produces = "application/json")
-	public ResponseEntity<FibonacciResult> getFibonacciValue(
+	public ResponseEntity<Result> getFibonacciValue(
 			@PathVariable Integer element) {
 		Optional<BigDecimal> value = fibonacciService.getValue(element);
 		return value.isPresent() ? 
-				new ResponseEntity<>(new FibonacciResult(value.get()), HttpStatus.OK) :
+				new ResponseEntity<>(new Result(value.get()), HttpStatus.OK) :
 				new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 	
