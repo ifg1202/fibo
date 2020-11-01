@@ -42,4 +42,12 @@ If everything starts correctly you should see a bunch of Spring Boot fibo projec
 
 In terminal you can run the following command (You can use Postman):
 
-**curl --request GET localhost:8080/v1/fibonacci/653**
+**curl --request GET localhost:8080/v1/fibonacci/{element}**
+
+Where {element} can be any Natural number.
+
+Example:
+
+If {element} = 654, then
+
+**curl --request GET localhost:8080/v1/fibonacci/654**
