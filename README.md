@@ -13,6 +13,14 @@ There are two branches.
  **git checkout [branch]**
  
  Where [branch] could be either main or hexagonal.
+ 
+# Code Coverage
+
+If you want to know the code coverage you could issue the next maven command:
+
+**mvn verify**
+
+If everything is OK, you should see the coverage in the file target/site/jacoco/index.html
 
 # Building
 
