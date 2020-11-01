@@ -12,14 +12,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class FibonacciServiceTest {
 
-	FibonacciService flightService = new FibonacciService();
+	FibonacciService fibonacciService = new FibonacciService();
 	
 	@Test
 	void getFirstValue() {
 		//given
 		Integer firtsElement = 0;
 		//when
-		Optional<BigDecimal> value = flightService.getValue(firtsElement);
+		Optional<BigDecimal> value = fibonacciService.getValue(firtsElement);
 		//then
 		assertEquals(BigDecimal.ZERO, value.get());
 	}
@@ -29,7 +29,7 @@ public class FibonacciServiceTest {
 		//given
 		Integer secondElement = 1;
 		//when
-		Optional<BigDecimal> value = flightService.getValue(secondElement);
+		Optional<BigDecimal> value = fibonacciService.getValue(secondElement);
 		//then
 		assertEquals(BigDecimal.ONE, value.get());
 	}
@@ -47,7 +47,7 @@ public class FibonacciServiceTest {
 	})
     void performFibonacciSecuence(Integer element, BigDecimal value) {
 		//then
-		assertEquals(value, flightService.getValue(element).get());
+		assertEquals(value, fibonacciService.getValue(element).get());
     }
 	
 	@Test
@@ -55,7 +55,7 @@ public class FibonacciServiceTest {
 		//given
 		Integer invalidElement = -1;
 		//when
-		Optional<BigDecimal> value = flightService.getValue(invalidElement);
+		Optional<BigDecimal> value = fibonacciService.getValue(invalidElement);
 		//then
 		assertTrue(value.isEmpty());
 	}
